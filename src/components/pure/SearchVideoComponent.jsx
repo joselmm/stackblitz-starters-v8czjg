@@ -46,14 +46,14 @@ const SearchVideoComponent = ({ setVideos }) => {
     fetch(uri)
       .then((res) => res.text())
       .then((res) => {
-        var json = res.match(/\(.+\)/g);
-        var sug = JSON.parse(json[0]);
+        var json = res.match(/\(.+\)/g)[0];
+        var sug = JSON.parse(json);
         console.log(sug);
       });
   }
 
   return (
-    <div className="col-6">
+    <div className="col-6" onClick={console.log('f')}>
       <form onSubmit={(e) => searchVideos(e)} className="input-group mb-3 ">
         <input
           id="search-input"
