@@ -45,10 +45,12 @@ const SearchVideoComponent = ({ setVideos }) => {
     const uri = `https://script.google.com/macros/s/AKfycbyn-92JTOxCjFR-U3zFUB4GOhoUp06zomignavKvCx_oP2T_I2sii-7kf57X6xs9krO/exec?query=${encodedQuery}`;
     fetch(uri)
       .then((res) => res.text())
-      .then((res) => {
-        var json = res.match(/\(.+\)/g)[0];
-        var sug = JSON.parse(json);
-        console.log(sug);
+      .then((res) => { 
+        const regex = /\[(\[[^\]]*\])+\]/;
+          const sugerencias = res.match(regex)[0];
+         //var json =  preJson.slice(1,preJson.length-3);
+        var sug = JSON.parse(sugerencias);
+        console.log(sug); 
       });
   }
 
