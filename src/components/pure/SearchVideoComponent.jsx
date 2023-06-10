@@ -39,14 +39,21 @@ const SearchVideoComponent = ({ setVideos }) => {
 
   /* Function that retrieves and renders search suggestions.*/
 
+  function suggestions() {
+    const query = inputSearchRef.current.value;
+    const encodedQuery = encodeURIComponent(query);
+    const uri = `https://suggestqueries.google.com/complete/search?jsonp=jQuery34004074955506976031_1686433076845&q=${encodedQuery}&hl=en&ds=yt&client=youtube&_=1686433076858`;
+    fetch(uri)
+      .then((res) => res.text())
+      .then((res) => console.log(res));
+  }
+
   return (
     <div className="col-6">
       <form onSubmit={(e) => searchVideos(e)} className="input-group mb-3 ">
         <input
           id="search-input"
-          onChange={() => {
-            /* console.log('valor input search ' + inputSearchRef.current.value); */
-          }}
+          onChange={suggestions}
           ref={inputSearchRef}
           type="search"
           className="form-control"
