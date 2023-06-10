@@ -42,10 +42,14 @@ const SearchVideoComponent = ({ setVideos }) => {
   function suggestions() {
     const query = inputSearchRef.current.value;
     const encodedQuery = encodeURIComponent(query);
-    const uri = `https://suggestqueries.google.com/complete/search?jsonp=jQuery34004074955506976031_1686433076845&q=${encodedQuery}&hl=en&ds=yt&client=youtube&_=1686433076858`;
+    const uri = `https://script.google.com/macros/s/AKfycbyn-92JTOxCjFR-U3zFUB4GOhoUp06zomignavKvCx_oP2T_I2sii-7kf57X6xs9krO/exec?query=${encodedQuery}`;
     fetch(uri)
       .then((res) => res.text())
-      .then((res) => console.log(res));
+      .then((res) => {
+        var json = res.match(/\(.+\)/g);
+        var sug = JSON.parse(json[0]);
+        console.log(sug);
+      });
   }
 
   return (
